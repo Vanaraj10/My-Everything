@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qoutes for you</title>
+    <style>
+                    #writingDisplay{
+   
+   color: white;
+   text-shadow: 0 0 10px #1ee0b9;  
+}
+.title {
+font-size: 4rem;
+color: hsl(288, 100%, 50%);
+text-align: center;
+}
+.credits{
+color: aliceblue;
+text-align: right;
+font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+body {
+font-family: Arial, sans-serif;
+margin: 0;
+padding: 0;
+background-color: #160b17;
+color: #333;
+}
+header, section {
+padding-top: 20px;
+padding-bottom: 20px;
+padding-left: 10px;
+padding-right: 10px;
+margin: 35px;
+border-radius: 15px;
+border: 4px solid rgb(178, 17, 175);
+box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+font-size: x-large;
+}
+h2 {
+margin-top: 0;
+color: rgb(255, 255, 255);
+font-family: 'Times New Roman', Times, serif;
+}
+
+.photo-gallery {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+gap: 10px;
+padding: 10px;
+}
+
+
+.photo-gallery img {
+width: 100%;
+height: 200px;
+object-fit: cover; 
+border-radius: 10px;
+transition: transform 0.3s ease-in-out;
+}
+.photo-gallery img:hover {
+transform: scale(1.05);
+}
+@media (max-width: 600px) {
+.photo-gallery {
+grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+}
+
+.photo-gallery img {
+height: 150px;
+}
+}
+button {
+padding: 8px 12px;
+margin-top: 10px;
+cursor: pointer;
+color: white;
+font-size: 30px;
+background:linear-gradient(to right,#2e05e6,#8c015e);
+border-radius: 20px;
+}
+ul{
+list-style-type: square;
+color: rgb(255, 255, 255);
+}
+li{
+margin: 20px;
+}
+strong{
+color: rgb(255, 242, 0);
+}
+.zoom-pulse {
+    transition: transform 0.4s, box-shadow 0.4s;
+}
+.zoom-pulse:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(192, 9, 228, 0.7);
+}
+
+    </style>
+</head>
+<body>
+    <section id="random-writings">
+        <h2>My writings for you</h2>
+        <p id="writingDisplay">In a world where many happen to carry the same name,<br>  
+            you are the one that stands alone and shines brighter than any of them✨.<br>  
+            That is why I called you StarLight🌟 because you are more than others,<br>  
+            You are the first and last light I would ever need💡.<br><br>  
+            
+            Many may share the name Karthika,<br>  
+            but NO ONE could be so close to my heart❤ than you.<br>  
+            You are not my friend but so much more - unique,<br>  
+            irreplaceable,<br>  
+            and endless♾.<br>  
+            Every moment I spend with you feels like a treasure💎,<br>  
+            and my feelings and focus for you only grow stronger💖.<br><br>  
+            
+            I could search the entire galaxy🌌,<br>  
+            and never find another like you.<br>  
+            You are not just the brightest star in my sky🌠,<br>  
+            you are the only star in my universe🌍.<br>  
+            No matter where life takes us,<br>  
+            You are my first and last light💫,<br>  
+            you are making other stars fade✨.<br><br>  
+            
+            You are the last person I speak to before sleep😴,<br>  
+            and the first one I search for after I wake up🌅.
+            </p>
+        <button id="new-qoute-btn">Show another writing</button>
+        <img class="zoom-pulse" src="images\photo_2025-02-24_20-59-40.jpg" style="height: 90%;width: 80%; margin: auto ;display: block;border-radius: 30px;margin-top: 30px;">
+        <p class="credits">Written by VJ with love ❤️</p>
+      </section>
+      <div>
+        
+      </div>
+      <script>
+         function generateRandomQuote() {
+    fetch("quotes.json")
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Could not load quotes.json, check the file path!");
+            }
+            return response.json();
+        })
+        .then(data => {
+            let quotes = data.quotes;
+            if (!quotes || quotes.length === 0) {
+                throw new Error("No quotes found in JSON!");
+            }
+            let randomIndex = Math.floor(Math.random() * quotes.length);
+            document.getElementById("writingDisplay").innerHTML = quotes[randomIndex];  // Use innerHTML to keep formatting
+        })
+        .catch(error => console.error("Error fetching quotes:", error));
+}
+window.onload = generateRandomQuote;
+document.getElementById("new-qoute-btn").addEventListener("click", generateRandomQuote);
+      </script>
+</body>
+</html>
